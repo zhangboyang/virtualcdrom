@@ -3,7 +3,7 @@
 ## Introduction
 
 * Use kext (kernel extensions) to simulate a CD-ROM drive
-* Tested on macOS Catalina
+* Tested on macOS Big Sur
 * Code is extremely simple
 * Only supports loading Audio CD
 * Supports loading CUE sheets
@@ -24,10 +24,11 @@
 3. `virtualcdrom.kext` should appear in `Products` folder in left sidebar.
 4. Load kext with following commands:
     ```
-    sudo cp -R [DRAG virtualcdrom.kext TO HERE] /tmp
-    sudo kextutil /tmp/virtualcdrom.kext
+    sudo cp -R [DRAG virtualcdrom.kext TO HERE] /Library/Extensions
+    sudo kextutil /Library/Extensions/virtualcdrom.kext
     ```
-5. Verify kext loaded:
+5. Approve the kext in System Preferences and reboot.
+6. Verify kext loaded:
     ```
     kextstat | grep virtualcdrom
     ```
