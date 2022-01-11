@@ -14,21 +14,22 @@
 ### Requirements
 
 1. Install Xcode, make sure `clang` & `python3` accessible from command-line.
-2. [Disable SIP](https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html) in order to load kexts.
-3. Download [ffmpeg for macOS](https://ffmpeg.zeranoe.com/builds/).
+2. [Disable SIP](https://developer.apple.com/library/archive/documentation/Security/Conceptual/System_Integrity_Protection_Guide/ConfiguringSystemIntegrityProtection/ConfiguringSystemIntegrityProtection.html) in order to load self-compiled kexts.
+3. Download [ffmpeg for macOS](https://ffmpeg.org/download.html).
 
 ### Build and load kernel driver
 
-1. Open `virtualcdrom.xcodeproj` with Xcode.
+1. Open `virtualcdrom.xcodeproj` with **Xcode**.
 2. Press *Command-B* to build project.
-3. `virtualcdrom.kext` should appear in `Products` folder in left sidebar.
-4. Load kext with following commands:
+3. From *Product* menu, click *Show Build Folder in Finder*.
+4. `virtualcdrom.kext` should appear in `Products/Debug` in build folder.
+5. Load kext with following commands:
     ```
     sudo cp -R [DRAG virtualcdrom.kext TO HERE] /Library/Extensions
     sudo kextutil /Library/Extensions/virtualcdrom.kext
     ```
-5. Approve the kext in System Preferences and reboot.
-6. Verify kext loaded:
+6. Approve the kext in **System Preferences** and reboot.
+7. Verify kext is loaded:
     ```
     kextstat | grep virtualcdrom
     ```
@@ -41,7 +42,7 @@
     ```
 2. Copy `ffmpeg`, let it along with `client`
     ```
-    cp /path/to/ffmpeg-X.X.X-macos64-static/bin/ffmpeg ffmpeg
+    cp /your/path/to/ffmpeg ffmpeg
     ```
 3. Run `./loadcd.py` to verify everything is ok, it should output:
     ```
@@ -61,17 +62,16 @@
     ```
     trying utf_8
     loading disk image
-      decoding '此花亭の四季.wav'
+      decoding '明日への扉.wav'
     ==================================================
     track 00 start  0:00.00 sector      0 crc ????????
-    track 01 start  3:51.11 sector  17336 crc ????????
-    track 02 start  7:41.22 sector  34597 crc ????????
-    track 03 start 12:21.69 sector  55644 crc ????????
+    track 01 start  4:46.59 sector  21509 crc ????????
+    track 02 start  9:34.44 sector  43094 crc ????????
     --------------------------------------------------
-    total          16:34.09 sector  74559 crc 3f2a71d8
+    total          17:23.02 sector  78227 crc 75ea388c
     ==================================================
-    sending 175715568 bytes to kernel
-      successfully loaded 175715568 bytes to kernel
+    sending 184342704 bytes to kernel
+      successfully loaded 184342704 bytes to kernel
     ```
 
 ### Or, Load a series of audio files as tracks
@@ -83,21 +83,18 @@
   * Example output of `loadcd.py`:
     ```
     loading track 00
-      decoding '01 春ウララ、君ト咲キ誇ル.wav'
+      decoding '01 明日への扉.wav'
     loading track 01
-      decoding '02 夏咲き恋花火.wav'
+      decoding '02 明日への扉 (instrumental).wav'
     loading track 02
-      decoding '03 茜空、君舞フ紅葉ノ散歩道.wav'
-    loading track 03
-      decoding '04 雪華煌めく家路にて.wav'
+      decoding '03 エピローグミニドラマ「明日と加瀬さん。」.wav'
     ==================================================
-    track 00 start  0:00.00 sector      0 crc 5d8d3313
-    track 01 start  3:51.11 sector  17336 crc 6ca8c5b0
-    track 02 start  7:41.22 sector  34597 crc 05469636
-    track 03 start 12:21.69 sector  55644 crc 35827c20
+    track 00 start  0:00.00 sector      0 crc a209b77f
+    track 01 start  4:46.59 sector  21509 crc a5683510
+    track 02 start  9:34.44 sector  43094 crc 0120bcf0
     --------------------------------------------------
-    total          16:34.09 sector  74559 crc 3f2a71d8
+    total          17:23.02 sector  78227 crc 75ea388c
     ==================================================
-    sending 175715568 bytes to kernel
-      successfully loaded 175715568 bytes to kernel
+    sending 184342704 bytes to kernel
+      successfully loaded 184342704 bytes to kernel
     ```

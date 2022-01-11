@@ -94,7 +94,7 @@ int main()
         doService(service);
     } else {
         fprintf(stderr, "  No matching drivers found.\n");
-        fprintf(stderr, "  Please run \"kextload /path/to/virtualcdrom.kext\" first.\n");
+        fprintf(stderr, "  Please run \"kextload /your/path/to/virtualcdrom.kext\" first.\n");
     }
     
     IOObjectRelease(iterator);
